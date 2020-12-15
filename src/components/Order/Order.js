@@ -10,7 +10,7 @@ for (let ingredientName in props.ingredients) {
             name: ingredientName, 
             amount: props.ingredients[ingredientName]
         }
-    )
+    );
 }
 
     const ingredientOutput = ingredients.map(ig => {
