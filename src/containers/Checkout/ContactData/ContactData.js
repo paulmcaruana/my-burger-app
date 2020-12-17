@@ -11,12 +11,12 @@ import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
     state = {
-          orderForm: {
+        orderForm: {
             name: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Name'
+                    placeholder: 'Your Name'
                 },
                 value: '',
                 validation: {
@@ -49,6 +49,7 @@ class ContactData extends Component {
                     required: true,
                     minLength: 5,
                     maxLength: 5
+
                 },
                 valid: false,
                 touched: false
@@ -70,7 +71,7 @@ class ContactData extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'email',
-                    placeholder: 'Email'
+                    placeholder: 'Your E-Mail'
                 },
                 value: '',
                 validation: {
@@ -98,7 +99,7 @@ class ContactData extends Component {
 
     orderHandler = ( event ) => {
         event.preventDefault();
-
+  
         const formData = {};
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -106,7 +107,8 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ings,
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         }
 
         this.props.onOrderBurger(order, this.props.token);
@@ -142,7 +144,7 @@ class ContactData extends Component {
         const updatedOrderForm = {
             ...this.state.orderForm
         };
-        const updatedFormElement = {
+        const updatedFormElement = { 
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
@@ -170,7 +172,7 @@ class ContactData extends Component {
                 {formElementsArray.map(formElement => (
                     <Input 
                         key={formElement.id}
-                        elementType={formElement.config.elementType} 
+                        elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}
                         invalid={!formElement.config.valid}
@@ -198,14 +200,15 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
-    };  
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
