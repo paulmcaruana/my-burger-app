@@ -8,15 +8,15 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 
-const asyncCheckout = asyncComponent (() => {
+const asyncCheckout = asyncComponent(() => {
   return import('./containers/Checkout/Checkout');
 });
 
-const asyncOrders = asyncComponent (() => {
+const asyncOrders = asyncComponent(() => {
   return import('./containers/Orders/Orders');
 });
 
-const asyncAuth = asyncComponent (() => {
+const asyncAuth = asyncComponent(() => {
   return import('./containers/Auth/Auth');
 });
 

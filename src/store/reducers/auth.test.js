@@ -19,17 +19,16 @@ describe('auth reducer', () => {
             error: null,
             loading: false,
             authRedirectPath: '/'
-        }, {
-            type: actionTypes.AUTH_SUCCESS, 
+        }, { 
+            type: actionTypes.AUTH_SUCCESS,
             idToken: 'some-token',
             userId: 'some-user-id'
-        })).toEqual ({
+         })).toEqual({
             token: 'some-token',
             userId: 'some-user-id',
             error: null,
             loading: false,
             authRedirectPath: '/'
-        })
-    });
-
+        });
+    })
 });
